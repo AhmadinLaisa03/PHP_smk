@@ -37,6 +37,7 @@
             <div class="col-md-9">
                 <div class="float-end mt-4"><a href="?log=logout" onclick="return confirm('Logout ?');">Log out</a></div>
                 <div class="float-end mt-4 me-4">User : <a href="?f=user&m=updateuser&id=<?= $_SESSION['iduser']; ?>"><?= $_SESSION['user']; ?></a></div>
+                <div class="float-end mt-4 me-4">Level : <?= $_SESSION['level']; ?></a></div>
             </div>
 
         </div>
@@ -44,12 +45,38 @@
         <div class="row mt-5">
             <div class="col-md-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=kategori&m=select" class="nav-link">Kategori</a></li>
-                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=menu&m=select" class="nav-link">Menu</a></li>
-                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=pelanggan&m=select" class="nav-link">Pelanggan</a></li>
-                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=order&m=select" class="nav-link">Order</a></li>
-                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=dtl&m=select" class="nav-link">Order Detail</a></li>
-                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=user&m=select" class="nav-link">User</a></li>
+                    <?php 
+                        $level = $_SESSION['level'];
+                        switch ($level) {
+                            case 'admin':
+                                echo '
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=kategori&m=select" class="nav-link">Kategori</a></li>
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=menu&m=select" class="nav-link">Menu</a></li>
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=pelanggan&m=select" class="nav-link">Pelanggan</a></li>
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=order&m=select" class="nav-link">Order</a></li>
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=orderdetail&m=select" class="nav-link">Order Detail</a></li>
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=user&m=select" class="nav-link">User</a></li>
+                                ';
+                                break;
+
+                            case 'koki':
+                                echo '
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=orderdetail&m=select" class="nav-link">Order Detail</a></li>
+                                ';
+                                break;
+
+                            case 'kasir':
+                                echo '
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=order&m=select" class="nav-link">Order</a></li>
+                                    <li class="nav-item"><a style="color: rgb(3, 141, 38);" href="?f=orderdetail&m=select" class="nav-link">Order Detail</a></li>
+                                ';
+                                break;
+
+                            default:
+                                echo 'tidak ada menu';
+                                break;
+                        }
+                    ?>
                 </ul>
             </div>
 

@@ -44,12 +44,15 @@
     if (isset($_POST['simpan'])) {
         $user = $_POST['user'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
-        $konfirmasi = $_POST['konfirmasi'];
+        $password = hash('sha256', $_POST['password']);
+        $konfirmasi = hash('sha256',$_POST['konfirmasi']);
         $level = $_POST['level'];
 
         if ($password == $konfirmasi) {
-            $db->runSQL("INSERT INTO tbluser VALUES ('','$user','$email','$password','$level',1)");
+            $sql = "INSERT INTO tbluser VALUES ('','$user','$email','$password','$level',1)";
+            // echo $sql;
+
+            $db->runSQL($sql);
             header("Location:?f=user&m=select");
         }else {
             echo "<h2 class='text-danger mt-1'>Konfirmasi Password salah !</h2>";

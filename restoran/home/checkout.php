@@ -5,7 +5,7 @@
 
         $idorder = idorder();
         $idpelanggan = $_SESSION['idpelanggan'];
-        $tgl = date('d-m-y');
+        $tgl = date('y-m-d');
 
         $sql = "SELECT * FROM tblorderdetail WHERE idorder = $idorder";
 
@@ -52,7 +52,7 @@
         global $db;
 
         foreach ($_SESSION as $key => $value) {
-            if ($key<>'pelanggan' && $key<>'idpelanggan') {
+            if ($key<>'pelanggan' && $key<>'idpelanggan' && $key<>'user' && $key<>'level' && $key<>'iduser' && $key<>'pelanggan') {
                 $id = substr($key,1);
                 
                 $sql = "SELECT * FROM tblmenu WHERE idmenu = $id";
@@ -74,7 +74,7 @@
 
         
         foreach ($_SESSION as $key => $value) {
-            if ($key<>'pelanggan' && $key<>'idpelanggan') {
+            if ($key<>'pelanggan' && $key<>'idpelanggan' && $key<>'user' && $key<>'level' && $key<>'iduser' && $key<>'pelanggan') {
                 $id = substr($key,1);
                 
                 unset($_SESSION['_'.$id]);
